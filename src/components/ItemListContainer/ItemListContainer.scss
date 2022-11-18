@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+
+$font: "Rubik", sans-serif;
+
+.listContainer{
+    background-color: bisque;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+.listContainer__saludo{
+    font-family: $font;
+    color: #0e4159;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.listContainer__status{
+    font-family: $font;
+    color: #0e4159;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 200px;
+}

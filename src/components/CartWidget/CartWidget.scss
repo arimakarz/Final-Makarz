@@ -1,0 +1,20 @@
+.cart{
+    margin-bottom: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 5px;
+    margin-left: 25%;
+    align-items: center;
+}
+
+.cart__image{
+    height: 45px;
+    filter: invert(17%) sepia(100%) saturate(421%) hue-rotate(154deg) brightness(101%) contrast(95%);
+}
+
+.cart__items{
+    font-size: 18px;
+    font-weight: bold;
+    
+    color:#0e4159;
+}
