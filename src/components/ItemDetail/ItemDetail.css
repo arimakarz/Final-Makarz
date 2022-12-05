@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap");
+hr.hr__style {
+  border: 0;
+  height: 4px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), bisque, rgba(0, 0, 0, 0));
+}
+
+.oneItem {
+  width: 800px;
+  height: auto;
+  color: bisque;
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0px 0px 25%;
+  justify-content: space-between;
+  width: 1000px;
+}
+
+.oneItem__data {
+  margin-left: 40px;
+  width: 800px;
+}
+
+.oneItem__imagen {
+  width: 200px;
+}
+
+.oneItem__titulo {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.oneItem__autor {
+  font-size: 16px;
+}
+
+.oneItem__precio {
+  font-weight: bold;
+}
+
+.oneItem__resumen {
+  font-size: 14px;
+}
+
+.oneItem__back {
+  margin-left: 50%;
+  font-size: 18px;
+}/*# sourceMappingURL=ItemDetail.css.map */

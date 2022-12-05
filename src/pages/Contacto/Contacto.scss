@@ -1,0 +1,33 @@
+.formContacto{
+    background-color:bisque;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    text-align: center;
+    margin-left: 25%;
+}
+
+.formContacto__title{
+    color: bisque;
+    margin-left: 20%;
+    margin-top: 15px;
+}
+
+.formContacto__text{
+    width: 400px;
+    margin-left: 25%;
+}
+
+.formContacto__area{
+    height: 80px;
+    width: 400px;
+    margin-left: 25%;
+}
+
+.formContacto__button{
+    margin: 15px 25%;
+    width: 400px;
+    text-align: center;
+}

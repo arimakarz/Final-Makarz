@@ -1,0 +1,31 @@
+.container__itemCount{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    width: 100px;
+}
+
+.container__cantidad{
+    display: inline-block;
+}
+
+#textCantidad{
+    width: 50px;
+    text-align: center;
+    height: 25px;
+}
+
+.btnCantidad{
+    background-color: white;
+    font-size: 14px;
+    height: 25px;
+}
+
+#btnAddOn{
+    height: 35px;
+    width: 100px;
+    margin-top: 5px;
+    align-self: center;
+    vertical-align: middle;
+}

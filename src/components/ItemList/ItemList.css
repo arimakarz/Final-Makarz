@@ -1,0 +1,21 @@
+.itemList{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+    
+}
+
+.itemList__advert{
+    text-align: center;
+    font-size: 18px;
+}
+
+/* .contenedor{
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px; 
+    border: 1px solid red;
+} */
