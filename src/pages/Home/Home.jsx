@@ -13,19 +13,19 @@ const Home = () => {
                 {/* <h1 className="home__body">Milan Libros</h1>
                 <h4 className="home__body">Todos tus libros en un solo lugar</h4>
                  */}
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src={banner1} class="d-block w-100" alt="No disponible" />
+                <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                        <div className="carousel-item active">
+                            <img src={banner1} className="d-block w-100" alt="No disponible" />
                         </div>
-                        <div class="carousel-item">
-                            <img src={banner2} class="d-block w-100" alt="No disponible" />
+                        <div className="carousel-item">
+                            <img src={banner2} className="d-block w-100" alt="No disponible" />
                         </div>
-                        <div class="carousel-item">
-                            <img src={banner3} class="d-block w-100" alt="No disponible" />
+                        <div className="carousel-item">
+                            <img src={banner3} className="d-block w-100" alt="No disponible" />
                         </div>
-                        <div class="carousel-item">
-                            <img src={banner4} class="d-block w-100" alt="No disponible" />
+                        <div className="carousel-item">
+                            <img src={banner4} className="d-block w-100" alt="No disponible" />
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Item.css';
 import '../ItemCount';
@@ -7,7 +7,6 @@ import ItemCount from '../ItemCount';
 import Proptypes from 'prop-types';
 
 const Item = ({element}) => {
-    //const {id, titulo, autor, categoria, precio, imagen} = element;
     const {id, titulo, autor, precio, imagen} = element;
     const [oneItem, setOneItem] = useState();
 
@@ -22,7 +21,7 @@ const Item = ({element}) => {
                 <label htmlFor="titulo" className='container__title'>{titulo.toUpperCase()}</label>
                 <label htmlFor="autor" className='container__author'>{autor}</label>
                 <label htmlFor="precio" className='container__price'>$ {precio}</label>
-                <ItemCount className='container__itemCount'></ItemCount>
+                <ItemCount id={id} className='container__itemCount' />
             </div>
             <div className='itemDetailContainer'>
                 {oneItem && <div>

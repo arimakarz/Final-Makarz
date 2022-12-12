@@ -1,8 +1,7 @@
-
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import './ItemListContainer.css';
 import ItemList from '../ItemList';
-//import Item from '../Item/Item';
 
 const ItemListContainer = ({greeting}) => {
 
@@ -18,16 +17,35 @@ const ItemListContainer = ({greeting}) => {
         {id: 9, titulo: "Somos nosotros", autor: "Willy Kohan", categoriaId: 3, precio: 7999, imagen:"https://contentv2.tap-commerce.com/cover/large/9789500767903_1.jpg?id_com=1113"},
         {id: 10, titulo: "Personas decentes", autor: "Leonardo Padura", categoriaId: 1, precio: 4900, imagen:"https://contentv2.tap-commerce.com/cover/large/9789876707213_1.jpg?id_com=1113"},
         {id: 11, titulo: "Historias de la Belle Epoque", autor: "Daniel Balmaceda", categoriaId: 1, precio: 4099, imagen: "https://contentv2.tap-commerce.com/cover/large/9789500767897_1.jpg?id_com=1113", resumen: "Este libro es una invitación a recorrer los espléndidos años dorados de la Belle ‰poque argentina. De las últimas décadas del siglo XIX al Centenario de la Revolución de Mayo, en 1910, y los años previos a la Primera Guerra Mundial. Una época de gran prosperidad, cuando el porvenir era esperanza y desarrollo. Tiempos de inmigración masiva; de inicio del ocio, de la gastronomía, del transporte y de mujeres que, por primera vez, se animaban a reclamar sus derechos. Espiamos el diario de Delfina Bunge y sus observaciones de quienes iban a misa, asistimos a un baile de fin de año, presenciamos el primer llamado telefónico, la aparición de los autos eléctricos, el miedo frente al primer vuelo en avión y el caso cero de una temible vuelta de la fiebre amarilla. ¿Cómo eran los dandis por esos días? ¿Cuántos años tenía el niño que quiso matar a Roca? ¿Cómo desbarató José Hernández una edición trucha del Martín Fierro? Decenas de casos de emprendedores que armaron un imperio con una máquina rudimentaria en un sótano: de Fort a Rigolleau. Historias nacidas de la incansable búsqueda que Daniel Balmaceda realiza desde hace años en periódicos, revistas y documentos inéditos de todo tipo, para descubrir y rearmar las piezas perdidas de nuestra historia."}
-        ];
-    
-        localStorage.setItem("listaLibros", JSON.stringify(listaLibros));
-
+    ];
     const listaCategorias = [
         {id:1, nombre:'Ficcion'},
         {id:2, nombre:'Salud'},
         {id:3, nombre:'Comunicación'},
         {id:4, nombre:'Infantil'}
     ];
+    
+    localStorage.setItem("listaLibros", JSON.stringify(listaLibros));
+    const {categoryId} = useParams();
+    let [listaMostrar, setListaMostrar] = useState(listaLibros);
+
+
+    const categoryFilter = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (categoryId){
+                let listaNueva = listaLibros.filter((oneItem) => oneItem.categoriaId == categoryId);
+                resolve(listaNueva);
+            }else{
+                resolve(listaLibros);
+            }
+        }, 500);
+    })
+
+    useEffect(()=>{
+        categoryFilter.then((res)=>{
+            setListaMostrar(res);
+        })
+    }, [categoryId])
 
     return(
         <div>
@@ -37,14 +55,14 @@ const ItemListContainer = ({greeting}) => {
                 {
                     listaCategorias.map((categoria)=>{
                         return(
-                            <div className="listContainer__categoriasList">
-                                <Link to={`/category/${categoria.id}`}>{categoria.nombre.toUpperCase()}</Link>
+                            <div key={categoria.id} className="listContainer__categoriasList">
+                                <Link key={categoria.id} to={`/category/${categoria.id}`}>{categoria.nombre.toUpperCase()}</Link>
                             </div>
                         )
                     })
                 }
                 <hr />
-                <ItemList listas={listaLibros}></ItemList>
+                <ItemList listas={listaMostrar}></ItemList>
             </div>
         </div>
     )

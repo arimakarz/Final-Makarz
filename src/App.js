@@ -5,6 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import ItemListContainer from './components/ItemListContainer';
 import ItemDetailContainer from './components/ItemDetailContainer'
 import Contacto from './pages/Contacto/Contacto';
+import Cart from './components/Cart/Cart';
 import './App.css';
 
 function App() {
@@ -33,8 +34,9 @@ function App() {
                 <Route exact path='/' element={<Home/>}/>
                 <Route exact path='/libros' element={<ItemListContainer/>}/>
                 <Route exact path='/contacto' element={<Contacto/>}/>
-                <Route exact path='/category/:categoryId' element={<ItemListContainer/>}></Route>
-                <Route exact path='/item/:id' element={<ItemDetailContainer />}></Route>
+                <Route exact path='/category/:categoryId' element={<ItemListContainer/>} />
+                <Route exact path='/item/:id' element={<ItemDetailContainer />} />
+                <Route exact path='/cart' element={<Cart/>} />
             </Routes>
         </BrowserRouter>
     )

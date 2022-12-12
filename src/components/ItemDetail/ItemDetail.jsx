@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './ItemDetail.css';
 import ItemCount from '../ItemCount/ItemCount';
+//import cartContext from '../../contexts/CartContext';
 
 const ItemDetail = () => {
 
@@ -30,7 +31,7 @@ const ItemDetail = () => {
     useEffect(()=>{
         taskGetOne
             .then(isResolved)
-    }, []);
+    });
 
     if (hasBeenResolved){
         return(
@@ -45,7 +46,7 @@ const ItemDetail = () => {
                             <h4 className='oneItem__autor'>Autor: {oneItem.autor}</h4>
                             <p className='oneItem__precio'>Precio: $ {oneItem.precio}</p>
                             <p className='oneItem__resumen'>Reseña: {oneItem.resumen ? oneItem.resumen : "Información no disponible"}</p>
-                            <ItemCount></ItemCount>
+                            <ItemCount id={oneItem.id} />
                         </div>
                     </div>
                     )
