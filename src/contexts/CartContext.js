@@ -3,18 +3,16 @@ import { CartReducer } from './CartReducer';
 
 export const CartContext = createContext([]);
 
-export const useCartContext = () => useContext(CartContext);
-
 const initialState = {
     productos: []
 }
 
 export const CartContextProvider = ({children}) => {
+
     const [state, dispatch] = useReducer(CartReducer, initialState);
 
-    function addItem(item, quantity){
-          const newItem = {item: item, quantity: quantity};
-          const productosActualizados = state.productos.concat(newItem);
+    function addItem(item){
+          const productosActualizados = state.productos.push(item);
           dispatch({ 
             type: 'ADD_ITEM',
             payload: productosActualizados
@@ -50,15 +48,13 @@ export const CartContextProvider = ({children}) => {
         value={{
         //total: state.total,
         productos: state.productos,
-        addItem
-        // removeItem,
-        // clear,
-        // isInCart
+        addItem,
+        removeItem,
+        clear,
+        isInCart
         }}
     >
         {children}
     </CartContext.Provider>
     );
 }
-
-export default useCartContext;

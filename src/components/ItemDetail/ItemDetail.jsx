@@ -1,13 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { CartContext } from '../../contexts/CartContext';
 import './ItemDetail.css';
 import ItemCount from '../ItemCount/ItemCount';
-//import cartContext from '../../contexts/CartContext';
 
 const ItemDetail = () => {
 
+    const { productos, addItem, removeItem, clear, isInCart } = useContext(CartContext);
     const {id} = useParams();
-
+    
     const listaLibros = JSON.parse(localStorage.getItem("listaLibros"));
 
     const [oneItem, setOneItem] = useState();
@@ -33,6 +34,13 @@ const ItemDetail = () => {
             .then(isResolved)
     });
 
+    const onAdd = (productoId, cantidad) => {
+        const producto = {id: productoId, quantity: cantidad};
+        console.log(producto);
+        addItem(producto);
+        console.log(productos)
+    }
+
     if (hasBeenResolved){
         return(
             <div>
@@ -46,7 +54,7 @@ const ItemDetail = () => {
                             <h4 className='oneItem__autor'>Autor: {oneItem.autor}</h4>
                             <p className='oneItem__precio'>Precio: $ {oneItem.precio}</p>
                             <p className='oneItem__resumen'>Reseña: {oneItem.resumen ? oneItem.resumen : "Información no disponible"}</p>
-                            <ItemCount id={oneItem.id} />
+                            <ItemCount onAdd={onAdd} id={oneItem.id} />
                         </div>
                     </div>
                     )
