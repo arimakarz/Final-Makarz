@@ -4,22 +4,19 @@ export function CartReducer(state, action){
 
     switch(type){
         case "ADD_ITEM":
-            //return addItem(action.item, state);
             return {
                 ...state,
-                productos: payload.productos
+                productos: [payload.item]
             }
         case "REMOVE_ITEM":
-            //return removeItem(action.item, state);
             return {
                 ...state,
-                productos: payload.productos
+                productos: [payload.item]
             }
         case "CLEAR":
-            //return clear(action, state);
             return {
                 ...state,
-                productos: payload.productos
+                productos: [payload.item]
             }
         default:
             return state;

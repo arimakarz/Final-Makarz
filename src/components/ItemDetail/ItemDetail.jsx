@@ -4,44 +4,46 @@ import { CartContext } from '../../contexts/CartContext';
 import './ItemDetail.css';
 import ItemCount from '../ItemCount/ItemCount';
 
-const ItemDetail = () => {
+const ItemDetail = ({item}) => {
 
     const { productos, addItem, removeItem, clear, isInCart } = useContext(CartContext);
-    const {id} = useParams();
+    // const {id} = useParams();
     
-    const listaLibros = JSON.parse(localStorage.getItem("listaLibros"));
+    // const listaLibros = JSON.parse(localStorage.getItem("listaLibros"));
 
-    const [oneItem, setOneItem] = useState();
-    const [hasBeenResolved, setHasBeenResolved] = useState();
+     const [oneItem, setOneItem] = useState(item);
 
-    const callItemDetail = (idLibro) => {
-        setOneItem(listaLibros.find((libro)=> libro.id == idLibro));
-    }
+     useEffect(() => {
+        setOneItem(item);
+     })
+    // const [hasBeenResolved, setHasBeenResolved] = useState();
 
-    const taskGetOne = new Promise((resolved) => {
-        setTimeout(() => {
-            callItemDetail(id);
-            resolved(id)
-        }, 1000);
-    })
+    // const callItemDetail = (idLibro) => {
+    //     setOneItem(listaLibros.find((libro)=> libro.id == idLibro));
+    // }
 
-    function isResolved(){
-        setHasBeenResolved(true);
-    }
+    // const taskGetOne = new Promise((resolved) => {
+    //     setTimeout(() => {
+    //         callItemDetail(id);
+    //         resolved(id)
+    //     }, 1000);
+    // })
 
-    useEffect(()=>{
-        taskGetOne
-            .then(isResolved)
-    });
+    // function isResolved(){
+    //     setHasBeenResolved(true);
+    // }
+
+    // useEffect(()=>{
+    //     taskGetOne
+    //         .then(isResolved)
+    // });
 
     const onAdd = (productoId, cantidad) => {
         const producto = {id: productoId, quantity: cantidad};
-        console.log(producto);
         addItem(producto);
-        console.log(productos)
     }
 
-    if (hasBeenResolved){
+    //if (hasBeenResolved){
         return(
             <div>
                 {
@@ -54,7 +56,7 @@ const ItemDetail = () => {
                             <h4 className='oneItem__autor'>Autor: {oneItem.autor}</h4>
                             <p className='oneItem__precio'>Precio: $ {oneItem.precio}</p>
                             <p className='oneItem__resumen'>Reseña: {oneItem.resumen ? oneItem.resumen : "Información no disponible"}</p>
-                            <ItemCount onAdd={onAdd} id={oneItem.id} />
+                            <ItemCount functionAdd={onAdd} id={oneItem.id} />
                         </div>
                     </div>
                     )
@@ -63,7 +65,7 @@ const ItemDetail = () => {
                 <Link className='oneItem__back' to="/libros"><button>Volver</button></Link>
             </div>
         )
-    }
+    //}
 }
 
 export default ItemDetail;
