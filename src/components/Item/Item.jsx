@@ -21,7 +21,7 @@ const Item = ({element}) => {
                 <label htmlFor="titulo" className='container__title'>{titulo.toUpperCase()}</label>
                 <label htmlFor="autor" className='container__author'>{autor}</label>
                 <label htmlFor="precio" className='container__price'>$ {precio}</label>
-                <ItemCount id={id} className='container__itemCount' />
+                {/* <ItemCount onAdd={onAdd} id={id} className='container__itemCount' /> */}
             </div>
             <div className='itemDetailContainer'>
                 {oneItem && <div>

@@ -35,6 +35,7 @@ function App() {
                 <Route exact path='/libros' element={<ItemListContainer/>}/>
                 <Route exact path='/contacto' element={<Contacto/>}/>
                 <Route exact path='/category/:categoryId' element={<ItemListContainer/>} />
+                {/* <Route exact path='/category/:name' element={<ItemListContainer/>} /> */}
                 <Route exact path='/item/:id' element={<ItemDetailContainer />} />
                 <Route exact path='/cart' element={<Cart/>} />
             </Routes>

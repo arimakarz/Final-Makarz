@@ -27,7 +27,11 @@ const ItemListContainer = ({greeting}) => {
     // ];
     
     //localStorage.setItem("listaLibros", JSON.stringify(listaLibros));
+    
     const {categoryId} = useParams();
+
+    //const { name } = useParams();
+    const [ categoryChosen, setCategoryChosen ] = useState();
     const [listaLibros, setListaLibros] = useState([]);
     const [listaCategorias, setListaCategorias] = useState([]);
     let [listaMostrar, setListaMostrar] = useState([]);
@@ -41,35 +45,49 @@ const ItemListContainer = ({greeting}) => {
         })
     }, [])
 
-    const categoryFilter = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (categoryId){
-                let listaNueva = listaLibros.filter((oneItem) => oneItem.categoriaId == categoryId);
-                resolve(listaNueva);
-            }else{
-                resolve(listaLibros);
-            }
-        }, 500);
-    })
+    // const categoryFilter = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         const categoryId = 1;
+    //         if (categoryId){
+    //             let listaNueva = listaLibros.filter((oneItem) => oneItem.categoryId == categoryId);
+    //             resolve(listaNueva);
+    //         }else{
+    //             resolve(listaLibros);
+    //         }
+    //     }, 500);
+    // })
 
     useEffect(()=>{
-        categoryFilter.then((res)=>{
-            setListaMostrar(res);
-        })
-        // const db = getFirestore();
-        // if (categoryId){
-        //     console.log(categoryId)
-        //     const categoryFilter = query(collection(db, 'items', where('categoriaId', '==', {categoryId})));
-        //     if (categoryFilter){
-        //         getDocs(categoryFilter).then((result) => {
-        //             //setListaMostrar(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
-        //             console.log(result.data());
-        //         })
-        //     }else{
-        //         console.log("vacia")
-        //     }
+        // categoryFilter.then((res)=>{
+        //     setListaMostrar(res);
+        // })
+        
+        const db = getFirestore();
+
+        // if (name){
+        //     const id = 1;
+        //     const itemRef = doc(db, "categorias", id.toString());
+        //     getDoc(itemRef).then(snapshot =>{
+        //         if(snapshot.exists()){
+        //             console.log(snapshot.data);
+        //         }
+        //     })
         // }
-    }, [categoryId])
+
+        if (categoryId){
+            console.log(categoryId)
+            const categoryFilter = query(collection(db, 'items', where('categoryId', '==', categoryId)));
+            if (categoryFilter){
+                getDocs(categoryFilter).then((result) => {
+                    setListaMostrar(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
+                    console.log(result.data());
+                })
+            }else{
+                console.log("vacia")
+            }
+        }
+      
+        }, [categoryId])
 
     useEffect(() => {
         const db = getFirestore();
@@ -88,9 +106,8 @@ const ItemListContainer = ({greeting}) => {
             const listaCompleta =result.docs.map((doc) => ({id:doc.id, ...doc.data()}))
             setListaMostrar(result.docs.map((doc) => ({id:doc.id, ...doc.data()})))
             setListaLibros(listaCompleta);
-            console.log(result.docs)
         })
-    }, [])
+    })
 
     return(
         <div>
@@ -101,7 +118,7 @@ const ItemListContainer = ({greeting}) => {
                     listaCategorias.map((categoria)=>{
                         return(
                             <div key={categoria.id} className="listContainer__categoriasList">
-                                <Link key={categoria.id} to={`/category/${categoria.id}`}>{categoria.nombre.toUpperCase()}</Link>
+                                <Link key={categoria.id} to={`/category/${categoria.id}`}>{categoria.name.toUpperCase()}</Link>
                             </div>
                         )
                     })

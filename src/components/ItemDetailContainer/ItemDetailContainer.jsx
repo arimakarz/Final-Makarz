@@ -5,7 +5,7 @@ import ItemDetail from '../ItemDetail';
 
 const ItemDetailContainer = () => {
 
-    const [oneItem, setoOneItem] = useState();
+    const [oneItem, setOneItem] = useState();
     const {id} = useParams();
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const ItemDetailContainer = () => {
         const itemRef = doc(db, "items", id);
         getDoc(itemRef).then(snapshot =>{
             if(snapshot.exists()){
-                setoOneItem(snapshot.data());
+                setOneItem({id: id, ...snapshot.data()});
             }
         })
     }, [id])

@@ -6,7 +6,7 @@ import ItemCount from '../ItemCount/ItemCount';
 
 const ItemDetail = ({item}) => {
 
-    const { productos, addItem, removeItem, clear, isInCart } = useContext(CartContext);
+    const { addItem } = useContext(CartContext);
     // const {id} = useParams();
     
     // const listaLibros = JSON.parse(localStorage.getItem("listaLibros"));
@@ -15,7 +15,7 @@ const ItemDetail = ({item}) => {
 
      useEffect(() => {
         setOneItem(item);
-     })
+     }, [item])
     // const [hasBeenResolved, setHasBeenResolved] = useState();
 
     // const callItemDetail = (idLibro) => {
@@ -38,9 +38,13 @@ const ItemDetail = ({item}) => {
     //         .then(isResolved)
     // });
 
-    const onAdd = (productoId, cantidad) => {
-        const producto = {id: productoId, quantity: cantidad};
-        addItem(producto);
+    const onAdd = (producto, cantidad) => {
+        debugger
+        if (cantidad > 0){
+            addItem(producto, cantidad);
+        }else{
+            alert("Ingrese cantidad");
+        }
     }
 
     //if (hasBeenResolved){
@@ -56,12 +60,13 @@ const ItemDetail = ({item}) => {
                             <h4 className='oneItem__autor'>Autor: {oneItem.autor}</h4>
                             <p className='oneItem__precio'>Precio: $ {oneItem.precio}</p>
                             <p className='oneItem__resumen'>Reseña: {oneItem.resumen ? oneItem.resumen : "Información no disponible"}</p>
-                            <ItemCount functionAdd={onAdd} id={oneItem.id} />
+                            <ItemCount onAdd={onAdd} id={oneItem} />
                         </div>
                     </div>
                     )
                 }
                 <hr className='hr__style'></hr>
+                <Link to ="/cart"><button className='btnFinalizar'>Finalizar compra</button></Link>
                 <Link className='oneItem__back' to="/libros"><button>Volver</button></Link>
             </div>
         )

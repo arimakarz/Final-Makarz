@@ -3,23 +3,9 @@ import { CartContext } from '../../contexts/CartContext';
 import { useState, useEffect } from 'react';
 import './ItemCount.css';
 
-const ItemCount = ({functionAdd, id}) => {
+const ItemCount = ({onAdd, id}) => {
     const [contador, setContador] = useState(0);
     const [stock, setStock] = useState(5)
-    const { productos, addItem } = useContext(CartContext);
-    //const [isInCart, setIsInCart] = useState(false);
-
-    useEffect(() => {
-        const productoExistente = false;
-        // if (productos){
-        //     productoExistente = productos.find((producto) => producto.id == id);
-        // }
-        // if (productoExistente){
-        //     setIsInCart(true);
-        // }else{
-        //     setIsInCart(false);
-        // }
-    }, [productos, id]);
 
     const setStatus = (operation) => {
         if (operation === '-'){
@@ -39,11 +25,6 @@ const ItemCount = ({functionAdd, id}) => {
         
     }
 
-    const onAdd = (productoId, cantidad) => {
-        const producto = {id: productoId, quantity: cantidad};
-        addItem(producto);
-    }
-
     return (
         <div className='container__itemCount'>
             <div className='container__cantidad'>
@@ -51,8 +32,7 @@ const ItemCount = ({functionAdd, id}) => {
                 <input id="textCantidad" name="cantidad" type="text" placeholder='0' value={contador} onChange={ e => setContador(e.target.value)}/>
                 <button className='btnCantidad' onClick={()=> setStatus('+')}>+</button>
             </div>
-            {/* <button id="btnAddOn" onClick={()=> setStatus('fin')}>Agregar</button> */}
-            <button id={id} onClick={(e)=>functionAdd(e.target.id, contador)}>Agregar</button>
+            <button id={id} onClick={(e)=>onAdd(id, contador)}>Agregar</button>
         </div>
     )
 }
