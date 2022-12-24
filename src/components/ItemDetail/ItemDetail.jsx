@@ -1,6 +1,7 @@
-import { useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
+import swal from 'sweetalert';
 import './ItemDetail.css';
 import ItemCount from '../ItemCount/ItemCount';
 
@@ -39,9 +40,9 @@ const ItemDetail = ({item}) => {
     // });
 
     const onAdd = (producto, cantidad) => {
-        debugger
         if (cantidad > 0){
             addItem(producto, cantidad);
+            swal("¡Ítem agregado existosamente", `Título: ${producto.titulo} - Cantidad: ${cantidad}`, "success");
         }else{
             alert("Ingrese cantidad");
         }
@@ -59,6 +60,7 @@ const ItemDetail = ({item}) => {
                             <h2 className='oneItem__titulo'>{oneItem.titulo}</h2>
                             <h4 className='oneItem__autor'>Autor: {oneItem.autor}</h4>
                             <p className='oneItem__precio'>Precio: $ {oneItem.precio}</p>
+                            <p>Stock disponible: {oneItem.stock}</p>
                             <p className='oneItem__resumen'>Reseña: {oneItem.resumen ? oneItem.resumen : "Información no disponible"}</p>
                             <ItemCount onAdd={onAdd} id={oneItem} />
                         </div>
@@ -66,8 +68,10 @@ const ItemDetail = ({item}) => {
                     )
                 }
                 <hr className='hr__style'></hr>
-                <Link to ="/cart"><button className='btnFinalizar'>Finalizar compra</button></Link>
-                <Link className='oneItem__back' to="/libros"><button>Volver</button></Link>
+                <div className='controls'>
+                    <Link to="/libros"><button className='controls__button'>Volver</button></Link>
+                    <Link to ="/cart"><button className='controls__button'>Finalizar compra</button></Link>
+                </div>
             </div>
         )
     //}

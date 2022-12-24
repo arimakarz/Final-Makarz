@@ -48,3 +48,25 @@ hr.hr__style {
     margin-left: 50%;
     font-size: 18px;
 }
+
+.controls{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    margin-left: 25%;
+
+}
+
+.controls__button{
+    width: auto;
+    height: 45px;
+    &:hover{
+        background-color: bisque;
+        color: #0e4159;
+    }
+}
+
+.btnFinalizar{
+    width: 200px;
+}

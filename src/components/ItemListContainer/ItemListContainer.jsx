@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {collection, doc,getDoc,getDocs,getFirestore, query, where} from 'firebase/firestore';
+import {collection, getDocs,getFirestore, query, where} from 'firebase/firestore';
 import { useParams, Link } from 'react-router-dom';
 import './ItemListContainer.css';
 import ItemList from '../ItemList';
@@ -30,8 +30,6 @@ const ItemListContainer = ({greeting}) => {
     
     const {categoryId} = useParams();
 
-    //const { name } = useParams();
-    const [ categoryChosen, setCategoryChosen ] = useState();
     const [listaLibros, setListaLibros] = useState([]);
     const [listaCategorias, setListaCategorias] = useState([]);
     let [listaMostrar, setListaMostrar] = useState([]);
@@ -43,7 +41,7 @@ const ItemListContainer = ({greeting}) => {
         getDocs(categoryCollection).then((result) => {
             setListaCategorias(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
         })
-    }, [])
+    
 
     // const categoryFilter = new Promise((resolve, reject) => {
     //     setTimeout(() => {
@@ -57,49 +55,6 @@ const ItemListContainer = ({greeting}) => {
     //     }, 500);
     // })
 
-    useEffect(()=>{
-        // categoryFilter.then((res)=>{
-        //     setListaMostrar(res);
-        // })
-        
-        const db = getFirestore();
-
-        // if (name){
-        //     const id = 1;
-        //     const itemRef = doc(db, "categorias", id.toString());
-        //     getDoc(itemRef).then(snapshot =>{
-        //         if(snapshot.exists()){
-        //             console.log(snapshot.data);
-        //         }
-        //     })
-        // }
-
-        if (categoryId){
-            console.log(categoryId)
-            const categoryFilter = query(collection(db, 'items', where('categoryId', '==', categoryId)));
-            if (categoryFilter){
-                getDocs(categoryFilter).then((result) => {
-                    setListaMostrar(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
-                    console.log(result.data());
-                })
-            }else{
-                console.log("vacia")
-            }
-        }
-      
-        }, [categoryId])
-
-    useEffect(() => {
-        const db = getFirestore();
-        //Traer producto por id: 
-        const itemRef = doc(db, "items", "yScrwNNqtKQWOmQp5PIF");
-        getDoc(itemRef).then(snapshot =>{
-            if(snapshot.exists()){
-                //setListaMostrar([snapshot.data])
-                console.log(snapshot.data());
-            }
-        })
-
         //Traer todos los registros:
         const itemCollection = collection(db, "items");
         getDocs(itemCollection).then((result) => {
@@ -107,8 +62,37 @@ const ItemListContainer = ({greeting}) => {
             setListaMostrar(result.docs.map((doc) => ({id:doc.id, ...doc.data()})))
             setListaLibros(listaCompleta);
         })
-    })
 
+        if (categoryId){
+            if(categoryId == 0){
+                setListaMostrar(listaLibros);
+            }else{
+                console.log(categoryId)
+                const categoryFilter = categoryId ? query(collection(db, "items"), where("categoryId", "==", parseInt(categoryId))) : collection(db, "items")
+                if (categoryFilter){
+                    getDocs(categoryFilter).then((result) => {
+                        setListaMostrar(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
+                        console.log(result.data());
+                    })
+                }else{
+                    console.log("vacia")
+                }
+            }
+        }
+      
+        }, [categoryId])
+
+    // useEffect(() => {
+    //     const db = getFirestore();
+    //     //Traer producto por id: 
+    //     const itemRef = doc(db, "items", "yScrwNNqtKQWOmQp5PIF");
+    //     getDoc(itemRef).then(snapshot =>{
+    //         if(snapshot.exists()){
+    //             //setListaMostrar([snapshot.data])
+    //             console.log(snapshot.data());
+    //         }
+    //     })
+    // })
     return(
         <div>
             <div className='listContainer'>

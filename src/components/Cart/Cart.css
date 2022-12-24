@@ -1,6 +1,6 @@
 .cart__title {
-  margin-top: 25px;
-  text-align: center;
+  margin: 25px 0px;
+  text-align: left;
   color: bisque;
 }
 
@@ -14,6 +14,9 @@
   flex-flow: column nowrap;
   vertical-align: middle;
   align-items: center;
+}
+
+.cart__items {
   width: 80%;
 }
 
@@ -25,7 +28,8 @@
   flex-flow: row nowrap;
   justify-content: space-around;
   text-align: center;
-  align-content: center;
+  align-items: center;
+  vertical-align: center;
   color: bisque;
   box-shadow: 0 4px 4px rgba(255, 255, 255, 0.4);
 }
@@ -35,10 +39,20 @@
 }
 
 .btnFinalizar {
-  margin-left: 50%;
   width: auto;
-  height: 40px;
-  margin-top: 20px;
+}
+.btnFinalizar:hover {
+  background-color: bisque;
+  color: #0e4159;
+}
+
+.btnClear {
+  width: auto;
+  background-color: firebrick;
+}
+.btnClear:hover {
+  background-color: bisque;
+  color: #0e4159;
 }
 
 .cart__label {
@@ -47,8 +61,41 @@
   margin-left: 15px;
 }
 
+.cart__buyersData {
+  border: 0.5px solid bisque;
+  margin-top: 15px;
+}
+
 .cart__buyer {
   display: flex;
   margin-bottom: 25px;
-  margin-left: 0px;
+  margin-left: 5px;
+}
+
+.compraExitosa {
+  color: bisque;
+  font-size: 18px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  height: 100px;
+  text-align: center;
+}
+
+.controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 50%;
+  margin-left: 25%;
+  height: 40px;
+}
+
+.cartItem__TotalPrice {
+  color: bisque;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 50%;
 }/*# sourceMappingURL=Cart.css.map */

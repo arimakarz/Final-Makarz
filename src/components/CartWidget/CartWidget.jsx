@@ -6,7 +6,7 @@ import Logo from '../../assets/images/cart.png';
 
 const CartWidget = () =>{
 
-    const { listaProductos } = useContext(CartContext);
+    const { listaProductos, itemsInCart } = useContext(CartContext);
     const [countItems, setCountItems] = useState(0);
 
     const isFull = {
@@ -18,24 +18,20 @@ const CartWidget = () =>{
     }
 
     useEffect(() => {
-        debugger
-        console.log(listaProductos)
-        let totalCount = 0;
-        if (listaProductos){
-            listaProductos.forEach((element)=>{ totalCount += element.quantity })
-            //setCountItems(listaProductos.reduce((acum, element) => acum + element.quantity, 0))
-        }
-        setCountItems(totalCount);
-        console.log(`cantidaD: ${countItems}`);
+        setCountItems(itemsInCart());
     }, [listaProductos])
 
     return(
-        <div className="cart" style={(countItems > 0) ? isFull : isEmpty}>
-            <Link to="/cart"><img src={Logo} className="cart__image" alt="cart"/>
-            <label className="cart__items" htmlFor="">{countItems}</label>Terminar compra</Link>
+        <div className="cartWidget" style={(countItems > 0) ? isFull : isEmpty}>
+            <Link to="/cart">
+                <div className='cartWidget__items'>
+                    <img src={Logo} className="cart__image" alt="cart"/>
+                    <label className="cart__items">{itemsInCart()}</label>
+                </div>
+                <p>¡Listo!</p>
+            </Link>
         </div>
     )
-
 }
 
 export default CartWidget;

@@ -1,3 +1,15 @@
 .itemDetailContainer {
   position: relative;
+}
+
+.itemDetail__noItem {
+  color: bisque;
+  font-size: 18px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-left: -300px;
+  width: 600px;
+  height: 100px;
+  text-align: center;
 }/*# sourceMappingURL=ItemDetailContainer.css.map */

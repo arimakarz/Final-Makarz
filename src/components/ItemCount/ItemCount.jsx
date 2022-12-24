@@ -1,11 +1,12 @@
 import { useContext } from 'react';
 import { CartContext } from '../../contexts/CartContext';
 import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
 import './ItemCount.css';
 
 const ItemCount = ({onAdd, id}) => {
     const [contador, setContador] = useState(0);
-    const [stock, setStock] = useState(5)
+    const [stock, setStock] = useState(id.stock)
 
     const setStatus = (operation) => {
         if (operation === '-'){
@@ -16,6 +17,8 @@ const ItemCount = ({onAdd, id}) => {
             if (operation === '+'){
                 if (contador < stock){
                     setContador(contador + 1);
+                }else{
+                    swal("¡No puedes agregar más ítems!", `Stock disponible: ${id.stock}`, 'error');
                 }
             }else{
                 setStock(stock - contador);

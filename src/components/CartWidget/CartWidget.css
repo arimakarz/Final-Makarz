@@ -1,10 +1,15 @@
-.cart {
-  margin-bottom: 10px;
+.cartWidget {
+  margin-top: 28px;
+  margin-left: 25%;
+  width: auto;
+  text-decoration: none;
+}
+
+.cartWidget__items {
   display: flex;
   flex-flow: row nowrap;
   -moz-column-gap: 5px;
        column-gap: 5px;
-  margin-left: 25%;
   align-items: center;
 }
 

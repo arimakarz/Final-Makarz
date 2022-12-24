@@ -1,9 +1,14 @@
-.cart{
-    margin-bottom: 10px;
+.cartWidget{
+    margin-top: 28px;
+    margin-left: 25%;
+    width: auto;
+    text-decoration: none;
+}
+
+.cartWidget__items{
     display: flex;
     flex-flow: row nowrap;
     column-gap: 5px;
-    margin-left: 25%;
     align-items: center;
 }
 
@@ -15,6 +20,5 @@
 .cart__items{
     font-size: 18px;
     font-weight: bold;
-    
     color:#0e4159;
 }

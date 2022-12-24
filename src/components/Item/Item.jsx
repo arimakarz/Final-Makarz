@@ -20,7 +20,7 @@ const Item = ({element}) => {
                 <Link to={`/item/${element.id}`}><img src={imagen} className='container__image' alt="No disponible" onClick={(e)=>{callItem(element)}}/></Link>
                 <label htmlFor="titulo" className='container__title'>{titulo.toUpperCase()}</label>
                 <label htmlFor="autor" className='container__author'>{autor}</label>
-                <label htmlFor="precio" className='container__price'>$ {precio}</label>
+                <label htmlFor="precio" className='container__price'>$ {precio.toFixed(2)}</label>
                 {/* <ItemCount onAdd={onAdd} id={id} className='container__itemCount' /> */}
             </div>
             <div className='itemDetailContainer'>

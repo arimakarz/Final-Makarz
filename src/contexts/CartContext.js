@@ -78,6 +78,10 @@ export const CartContextProvider = ({children}) => {
         return productoExistente;
     }
 
+    function itemsInCart(){
+        return state.listaProductos.reduce((acum, element) => acum + element.quantity, 0);
+    }
+
     return (
     <CartContext.Provider
         value={{
@@ -87,7 +91,8 @@ export const CartContextProvider = ({children}) => {
             addItem,
             removeItem,
             clearCart,
-            isInCart
+            isInCart,
+            itemsInCart
         }}
     >
         {children}
