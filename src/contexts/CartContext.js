@@ -14,35 +14,21 @@ export const CartContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(CartReducer, initialState);
 
     function addItem(product, count){
-        // const updatedList = state.listaProductos;
-        // const updatedIndex = isInCart(producto);
-
-        // if (updatedIndex < 0){
-        //     const newItem = {item: producto, quantity: count}
-        //     updatedList.push(newItem);
-        // }else{
-        //     const updatedItem = {...state.listaProductos[updatedIndex], quantity: count}
-        //     updatedList.splice(updatedIndex, 1, updatedItem)
-        // }
         const updatedList = [...state.listaProductos];
         console.log(updatedList)
         let updatedIndex = isInCart(product);
-        // if (updatedList){
-        //     updatedIndex = updatedList.findIndex((element) => element.item.id == product.id);
+        
+        if (updatedIndex < 0){
+                const newItem = {item: product, quantity: count}
+                updatedList.push(newItem);
+                console.log(updatedList)
+        }else{
+            const updatedCount = updatedList[updatedIndex].quantity + count;
+            const updatedItem = updatedList[updatedIndex];
+            updatedItem.quantity = updatedCount;
+            updatedList.splice(updatedIndex, 1, updatedItem)
+        }
 
-            if (updatedIndex < 0){
-                // if(state.item){
-                    const newItem = {item: product, quantity: count}
-                    updatedList.push(newItem);
-                    console.log(updatedList)
-        //         }
-            }else{
-                const updatedCount = updatedList[updatedIndex].quantity + count;
-                const updatedItem = updatedList[updatedIndex];
-                updatedItem.quantity = updatedCount;
-                updatedList.splice(updatedIndex, 1, updatedItem)
-            }
-        // }
         dispatch({ 
             type: 'ADD_ITEMS',
             payload: { item: product, quantity: count, listaProductos: updatedList }

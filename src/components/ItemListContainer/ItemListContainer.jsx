@@ -37,23 +37,9 @@ const ItemListContainer = ({greeting}) => {
     useEffect(()=>{
         const db = getFirestore();
         const categoryCollection = collection(db, 'categorias');
-        //const categoryCollection = query(collection(db,'cateogorias', where('name','==','Ficcion')))
         getDocs(categoryCollection).then((result) => {
             setListaCategorias(result.docs.map((doc)=>({id:doc.id,...doc.data()})))
         })
-    
-
-    // const categoryFilter = new Promise((resolve, reject) => {
-    //     setTimeout(() => {
-    //         const categoryId = 1;
-    //         if (categoryId){
-    //             let listaNueva = listaLibros.filter((oneItem) => oneItem.categoryId == categoryId);
-    //             resolve(listaNueva);
-    //         }else{
-    //             resolve(listaLibros);
-    //         }
-    //     }, 500);
-    // })
 
         //Traer todos los registros:
         const itemCollection = collection(db, "items");
@@ -82,17 +68,6 @@ const ItemListContainer = ({greeting}) => {
       
         }, [categoryId])
 
-    // useEffect(() => {
-    //     const db = getFirestore();
-    //     //Traer producto por id: 
-    //     const itemRef = doc(db, "items", "yScrwNNqtKQWOmQp5PIF");
-    //     getDoc(itemRef).then(snapshot =>{
-    //         if(snapshot.exists()){
-    //             //setListaMostrar([snapshot.data])
-    //             console.log(snapshot.data());
-    //         }
-    //     })
-    // })
     return(
         <div>
             <div className='listContainer'>

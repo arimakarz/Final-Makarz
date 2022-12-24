@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { CartContext } from '../../contexts/CartContext';
-import { doc, addDoc, collection, getFirestore, updateDoc, writeBatch, Timestamp, getDoc } from 'firebase/firestore';
+import { doc, addDoc, collection, getFirestore, updateDoc, Timestamp } from 'firebase/firestore';
 import swal from 'sweetalert';
 import './Cart.css';
 
@@ -80,43 +80,12 @@ const Cart = () => {
         }
     };
 
-    const updateOrder = () => {
-        const orderDoc = doc(db, 'orders', '2vtkqz884fXmPBfa0wkg');
-        updateDoc(orderDoc, {buyer:{name:'juan', phone:'2222', email: 'prueba@coder.com'},total:200}).then(res => alert('actualizado'));
-    }
-
     const updateStock = () => {
         listaProductos.map((producto) => {
             const orderDoc = doc(db, 'items', producto.item.id.toString());
             updateDoc(orderDoc, {stock: producto.item.stock - producto.quantity }).then(res => res)
         })
     }
-
-    const batchOrder = () => {
-        //Actualizar un lote de datos
-        console.log(listaProductos)
-        const db = getFirestore();
-        const batch = writeBatch(db);
-        const orderDoc = doc(db, 'orders', '4IbWpmLn656GW9UVNgO2');
-        const orderDoc2 = doc(db, 'orders', 'NdNYMgGqqbe0UUbtTugM');
-        
-        batch.update(orderDoc,{total: 350});
-        batch.update(orderDoc2,{total: 29});
-        //tambien puedo hacer un batch.set para setear un valor nuevo
-        batch.commit().then(res => alert("todo bien"));
-    }
-
-    const isFull = {
-        visible: true
-    }
-
-    const isEmpty = {
-        visible: false
-    }
-
-    // useEffect(() => {
-    //     setCartItems(listaProductos);
-    // }, [listaProductos])
 
     const handlerRemoveItem = (id) => {
         removeItem(id);
@@ -172,7 +141,7 @@ const Cart = () => {
                         return(
                             <div>
                                 <div className='cartItem' key={producto.item.id}>
-                                    <img src={producto.item.imagen} className='cartItem__image' />
+                                    <img src={producto.item.imagen} className='cartItem__image' alt='No disponible'/>
                                     <p className='cartItem__title'>{producto.item.titulo}</p>
                                     <p className='cartItem__author'>{producto.item.autor}</p>
                                     <p className='cartItem__quantity'>{producto.quantity}</p>
@@ -188,8 +157,6 @@ const Cart = () => {
                     <div className='controls'>
                         <button className='btnClear' onClick={(()=>handlerEmptyCart())}>Vaciar carrito</button>
                         <button className='btnFinalizar' onClick={()=>sendOrder()}>Generar orden de compra</button>
-                        {/* <button className='btnFinalizar' onClick={()=>updateOrder()}>Update orden de compra</button>
-                        <button className='btnFinalizar' onClick={()=>batchOrder()}>Batch orden de compra</button> */}
                     </div>
                 </div>
             </div>

@@ -5,17 +5,6 @@ import './Navbar.css';
 
 const Navbar = ({logo, menues}) =>{
     return(
-        // <div className='navbar'>
-        //     <img className="navbar__logo" src={logo} alt="logo" />
-        //     <div className='navbar__menues'>
-        //         {
-        //             menues.map((menu, index) => {
-        //                 return <a href="#" className="navbar__menu" key={index}>{menu}</a>
-        //             })
-        //         }
-        //         <CartWidget></CartWidget>
-        //     </div>
-        // </div>
         <div className='navbar__all'>
             <nav className="navbar-expand-lg bg-light">
                 <div className="container-fluid navbar">

@@ -10,9 +10,6 @@ const Home = () => {
     return(
         <div>
             <Layout>
-                {/* <h1 className="home__body">Milan Libros</h1>
-                <h4 className="home__body">Todos tus libros en un solo lugar</h4>
-                 */}
                 <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
                     <div className="carousel-inner">
                         <div className="carousel-item active">
